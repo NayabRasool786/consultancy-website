@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="display-4">Blog</h1>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('main.create_post') }}" class="btn btn-primary">
+                <i class="fas fa-plus-circle me-2"></i>Create New Post
+            </a>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+                <div class="card shadow-sm h-100">
+                    {% if post.image_file %}
+                        {% if post.image_file.startswith('http') %}
+                            <img src="{{ post.image_file }}" class="card-img-top blog-post-image" alt="{{ post.title }}">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='post_images/' + post.image_file) }}" class="card-img-top blog-post-image" alt="{{ post.title }}">
+                        {% endif %}
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="card-title h5">{{ post.title }}</h2>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            by {{ post.author.username }} on {{ post.timestamp.strftime('%B %d, %Y') }}
+                        </h6>
+                        <p class="card-text">{{ post.content|truncate(100) }}</p>
+                        <a href="{{ url_for('main.post', post_id=post.id) }}" class="btn btn-outline-primary mt-auto">Read More</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12 text-center">
+                <p class="lead">No posts have been made yet. Be the first!</p>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="px-4 py-5 my-5 text-center">
+        <h1 class="display-5 fw-bold">Empowering Small Businesses with the Right Talent</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">At TalentBridge India, we specialize in providing efficient, personalized, and scalable recruitment solutions tailored for startups and small businesses across IT, Engineering, Healthcare, and more.</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{{ url_for('main.for_clients') }}" role="button" class="btn btn-primary btn-lg px-4 gap-3">Hire Talent</a>
+                <a href="{{ url_for('main.for_hire') }}" role="button" class="btn btn-outline-secondary btn-lg px-4">Get Hired</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container px-4 py-5" id="why-choose-us">
+        <h2 class="pb-2 border-bottom text-center">Why Choose Us?</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-4">
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-primary text-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div>
+                    <h4>10+ Years of Experience</h4>
+                    <p>Our team has over a decade of combined experience in both International & Indian recruitment landscapes.</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-primary text-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                    <i class="fas fa-tachometer-alt"></i>
+                </div>
+                <div>
+                    <h4>Fast Turnaround Times</h4>
+                    <p>We understand the pace of modern business and deliver pre-vetted candidates quickly to keep your projects on track.</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-primary text-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <div>
+                    <h4>Customized Solutions</h4>
+                    <p>One size doesn't fit all. We tailor our hiring strategies to match your unique needs and company culture.</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div class="icon-square bg-primary text-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div>
+                    <h4>Cost-Effective for Startups</h4>
+                    <p>We offer specialized, budget-friendly plans designed to help startups and SMBs grow without breaking the bank.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-light">
+    <div class="container px-4 py-5">
+        <h2 class="pb-2 border-bottom text-center">Discover More</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-md-2">
+            <div class="col">
+                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('{{ url_for('static', filename='images/about_us_india.jpg') }}'); background-size: cover; background-position: center;">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Who We Are</h2>
+                        <p>Learn about our mission, vision, and the expert team dedicated to your success.</p>
+                        <a href="{{ url_for('main.about') }}" class="btn btn-outline-light mt-auto">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg" style="background-image: url('{{ url_for('static', filename='images/our_services_india.jpg') }}'); background-size: cover; background-position: center;">
+                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1" style="background-color: rgba(0, 0, 0, 0.5);">
+                        <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Our Services</h2>
+                        <p>Explore our full range of recruitment and value-added services designed for growing businesses.</p>
+                        <a href="{{ url_for('main.services') }}" class="btn btn-outline-light mt-auto">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% if posts %}
+    <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">From Our Blog</h2>
+
+        <div id="blogCarousel" class="carousel slide shadow-sm " data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                {% for post in posts %}
+                    <button type-="button" data-bs-target="#blogCarousel" data-bs-slide-to="{{ loop.index0 }}" class="{{ 'active' if loop.first }}"></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner rounded">
+                {% for post in posts %}
+                <div class="carousel-item {{ 'active' if loop.first }}">
+                    {% if post.image_file %}
+                        {% if post.image_file.startswith('http') %}
+                            <img src="{{ post.image_file }}" class="d-block w-100 blog-post-image" alt="{{ post.title }}">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='post_images/' + post.image_file) }}" class="d-block w-100 blog-post-image" alt="{{ post.title }}">
+                        {% endif %}
+                    {% else %}
+                        
+                    {% endif %}
+                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded">
+                        <h5>{{ post.title }}</h5>
+                        <p>{{ post.content|striptags|truncate(80) }}</p>
+                        <a href="{{ url_for('main.post', post_id=post.id) }}" class="btn btn-light btn-sm">Read More</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#blogCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#blogCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    {% endif %}
+    <div class="container px-4 py-5">
+        <h2 class="pb-2 border-bottom">Testimonial</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fas fa-quote-left text-primary me-2"></i>Strategic Vision</h4>
+                        <p class="card-text">"Consultancy Co. transformed our business. Their market insights for the Indian subcontinent were invaluable and led to a 40% increase in our market share."</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <p class="mb-0 fw-bold">Arjun Kapoor</p>
+                        <p class="text-muted">CEO, Tech Solutions Pvt. Ltd.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fas fa-quote-left text-primary me-2"></i>Operational Excellence</h4>
+                        <p class="card-text">"Their team is professional, dedicated, and incredibly knowledgeable. They helped us streamline our operations and significantly cut down on overhead costs."</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <p class="mb-0 fw-bold">Sneha Reddy</p>
+                        <p class="text-muted">Director of Operations, PharmaCorp</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title"><i class="fas fa-quote-left text-primary me-2"></i>Financial Acumen</h4>
+                        <p class="card-text">"The financial advisory service was top-notch. They helped us secure our Series B funding and provided a clear roadmap for future financial stability."</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <p class="mb-0 fw-bold">Vikram Singh</p>
+                        <p class="text-muted">Founder, FinTech Innovators</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

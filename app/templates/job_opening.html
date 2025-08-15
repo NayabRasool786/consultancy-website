@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="border-bottom pb-3 mb-4">
+                <h1 class="display-5">{{ job.title }}</h1>
+                <p class="lead text-muted">{{ job.location }} &middot; {{ job.job_type }}</p>
+            </div>
+
+            <article class="job-description mb-4">
+                <h4>Job Description</h4>
+                <p style="white-space: pre-wrap;">{{ job.description|safe }}</p>
+            </article>
+
+            <div class="text-center">
+                <a href="mailto:careers@consultancyco.com?subject=Application for {{ job.title }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-paper-plane me-2"></i>Apply Now
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

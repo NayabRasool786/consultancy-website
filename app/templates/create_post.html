@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">{{ legend }}</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <p class="text-muted text-center">Add an Image (Optional)</p>
+                    <div class="mb-3">
+                        {{ form.image_url.label(class="form-label") }}
+                        {{ form.image_url(class="form-control", placeholder="https://example.com/image.jpg") }}
+                    </div>
+                    <p class="text-muted text-center">OR</p>
+                    <div class="mb-3">
+                        {{ form.image_upload.label(class="form-label") }}
+                        {{ form.image_upload(class="form-control") }}
+                    </div>
+                    <hr>
+
+                    <div class="mb-3">
+                        {{ form.title.label(class="form-label") }}
+                        {{ form.title(class="form-control") }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.content.label(class="form-label") }}
+                        {{ form.content(class="form-control", placeholder="This is a regular paragraph.&#10;&#10;And this is a new paragraph after a line break.&#10;&#10;## This is a Heading&#10;* This is a bullet point&#10;* Another bullet point&#10;&#10;**This text will be bold.**&#10;*This text will be italic.*") }}
+                    </div>
+                    
+                    <hr>
+
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

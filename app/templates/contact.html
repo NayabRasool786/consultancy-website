@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Get in Touch</h1>
+        <p class="lead">We're here to help. Reach out to us for any inquiries or to start a project.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title mb-4">Send Us a Message</h3>
+                    <form method="POST" action="">
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-3">
+                            {{ form.name.label(class="form-label") }}
+                            {{ form.name(class="form-control") }}
+                            {% for error in form.name.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control") }}
+                            {% for error in form.email.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.service.label(class="form-label") }}
+                            {{ form.service(class="form-select") }}
+                        </div>
+                        
+                        <div class="mb-3">
+                            {{ form.message.label(class="form-label") }}
+                            {{ form.message(class="form-control", rows="5") }}
+                             {% for error in form.message.errors %}
+                                <span class="text-danger">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+
+                        {{ form.submit(class="btn btn-primary") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-lg-4">
+            <div class="p-4 border rounded-3">
+                <h4>Contact Information</h4>
+                <hr>
+                <p><strong><i class="fas fa-map-marker-alt fa-fw me-2"></i>Address:</strong><br>123 Business Hub, MG Road<br>Bangalore, Karnataka 560001, India</p>
+                <p><strong><i class="fas fa-phone fa-fw me-2"></i>Phone:</strong><br>+91 98765 43210</p>
+                <p><strong><i class="fas fa-envelope fa-fw me-2"></i>Email:</strong><br>contact@consultancyco.com</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

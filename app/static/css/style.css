@@ -1,0 +1,98 @@
+/* --- Root Variables for Theming --- */
+:root {
+    /* Default Light Theme Colors */
+    --bs-body-bg: #ffffff;
+    --bs-body-color: #212529;
+    --custom-secondary-bg: #f8f9fa; /* Light gray for nav/footer */
+    --bs-border-color: #dee2e6;
+}
+
+[data-bs-theme="dark"] {
+    /* Dark Theme Colors */
+    --bs-body-bg: #212529;
+    --bs-body-color: #f8f9fa;
+    --custom-secondary-bg: #343a40; /* Darker gray for nav/footer */
+    --bs-border-color: #495057;
+
+    /* Invert navbar colors for dark mode */
+    .navbar {
+        --bs-navbar-color: rgba(255, 255, 255, 0.75);
+        --bs-navbar-hover-color: #ffffff;
+    }
+}
+
+/* --- General Styles --- */
+body {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Apply theme variable to components that don't auto-update */
+.bg-light {
+    background-color: var(--custom-secondary-bg) !important;
+}
+
+.border {
+    border-color: var(--bs-border-color) !important;
+}
+
+/* --- Back to Top Button Styles --- */
+#back-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* Hidden by default */
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    z-index: 1000;
+    cursor: pointer;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+/* --- Blog Image Styles --- */
+.blog-post-image {
+    width: 100%; /* Make the image take the full width of its container (the card) */
+    aspect-ratio: 16 / 9; /* Force a widescreen aspect ratio */
+    object-fit: cover; /* Crop the image to fit the container without stretching it */
+}
+
+/* --- Carousel Styles --- */
+#blogCarousel .carousel-inner {
+    max-height: 400px; /* Adjust this value as needed */
+}
+
+#blogCarousel .carousel-item img {
+    object-fit: cover; /* Maintain aspect ratio and cover the area */
+    max-height: 400px; /* Match the carousel inner height */
+}
+
+/* --- Helper class for service icons --- */
+.icon-square {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.75rem;
+}
+
+/* --- Dark Mode Footer Fix --- */
+[data-bs-theme="dark"] footer .footer-link,
+[data-bs-theme="dark"] footer .text-dark {
+    color: #fff !important; /* Change text color to white */
+}
+
+[data-bs-theme="dark"] footer .btn-outline-dark {
+    color: #fff; /* Change icon color to white */
+    border-color: #fff; /* Change button border to white */
+}
+
+[data-bs-theme="dark"] footer .btn-outline-dark:hover {
+    background-color: #fff; /* Make hover background white */
+    color: #212529; /* Make hover icon color dark */
+}
+
+/* --- Blog Content Formatting --- */
+.blog-content-formatted {
+    white-space: pre-wrap;
+    font-family: inherit; /* Ensures the font matches the rest of the site */
+}
