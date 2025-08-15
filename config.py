@@ -16,8 +16,11 @@ class Config:
     # Configure the database.
     # We specify the database URI to connect to. Here, we're using SQLite.
     # The database file will be located in the project's base directory.
+    # Prioritize the DATABASE_URL environment variable if it exists (for Render)
+    # Otherwise, fall back to the local SQLite database.
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
+    
 
     # This setting disables a Flask-SQLAlchemy feature that signals the application
     # every time a change is about to be made in the database, which is not needed.
